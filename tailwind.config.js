@@ -10,6 +10,7 @@ module.exports = {
    theme: {
     extend: {
       colors:{
+        darkCream:"#FCF0C8",
         cream : "#FCF3DE",
         forest : "#124029",
         mint : "#E4FFCD",
