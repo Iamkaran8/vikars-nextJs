@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
 
         const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET!, { expiresIn: '1d' });
 
-        return NextResponse.json({ token, email: admin.email, msg: "Login Success" });
+        return NextResponse.json({ token, email: admin.email, msg: "Login Success", type: "Admin" });
     } catch (err: unknown) {
         const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
         return NextResponse.json({ msg: errorMessage }, { status: 500 });
