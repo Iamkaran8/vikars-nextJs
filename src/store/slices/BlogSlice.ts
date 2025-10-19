@@ -1,56 +1,52 @@
-import { FetchAllBlogs } from "@/app/utils/apis/blog/FetchAllBlogs";
 import { createSlice } from "@reduxjs/toolkit";
+import { FetchAllBlogs } from "@/app/utils/apis/blog/FetchAllBlogs";
 
-
-
-interface allBlogsType {
-    _id: string,
-    title: string,
-    description: string,
-    image: string,
-    date: string,
-    category: string,
-    createdAt: string,
-    updatedAt: string,
-    __v: string
-}
-interface blogType {
-    allBlogs: allBlogsType[],
-    loading: boolean,
-    error: null | string | any
+// ✅ Use a consistent interface name
+export interface Blog {
+    _id: string;
+    title: string;
+    description: string;
+    image: string;
+    date: string;
+    category: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: string;
 }
 
+export interface BlogState {
+    allBlogs: Blog[];
+    loading: boolean;
+    error: string | null;
+}
 
-const initialState: blogType = {
+const initialState: BlogState = {
     allBlogs: [],
     loading: false,
-    error: null
-}
+    error: null,
+};
 
 export const BlogSlice = createSlice({
     name: "blog",
     initialState,
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(FetchAllBlogs.pending, (state) => {
                 state.loading = true;
-                state.error = null
+                state.error = null;
             })
             .addCase(FetchAllBlogs.fulfilled, (state, action) => {
                 state.allBlogs = action.payload.blogs;
-                console.log("printing all the state", state.allBlogs)
+                console.log("printing all the state", state.allBlogs);
                 state.loading = false;
-                state.error = null
+                state.error = null;
             })
             .addCase(FetchAllBlogs.rejected, (state, action) => {
-                state.error = action.payload
-            })
-    }
-})
-
-
+                state.loading = false;
+                state.error = (action.payload as string) ?? "Failed to fetch blogs";
+            });
+    },
+});
 
 export default BlogSlice.reducer;

@@ -2,9 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdminLogin } from '@/app/utils/apis/admin/AdminLogin';
 
 
+interface User {
+  token: string;
+  admin: {
+    id: string;
+    name: string;
+    email: string;
+  };
+}
+
 interface AuthState {
   isAuthenticated: boolean;
-  user: any | null;
+  user: User | null;
   loading: boolean;
   error: string | null;
 }
