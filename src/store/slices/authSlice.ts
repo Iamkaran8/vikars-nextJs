@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AdminLogin } from '@/app/utils/apis/admin/AdminLogin';
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AdminLogin } from "@/app/utils/apis/admin/AdminLogin";
 
 interface User {
   token: string;
@@ -18,7 +17,6 @@ interface AuthState {
   error: string | null;
 }
 
-
 const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
@@ -26,16 +24,10 @@ const initialState: AuthState = {
   error: null,
 };
 
-
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<{ email: string; token: string }>) => {
-      state.isAuthenticated = true;
-      state.user = action.payload;
-      state.error = null;
-    },
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
@@ -48,7 +40,7 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(AdminLogin.fulfilled, (state, action) => {
+      .addCase(AdminLogin.fulfilled, (state, action: PayloadAction<User>) => {
         state.loading = false;
         state.isAuthenticated = true;
         state.user = action.payload;
@@ -56,12 +48,11 @@ const authSlice = createSlice({
       })
       .addCase(AdminLogin.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
         state.isAuthenticated = false;
+        state.error = action.payload ?? "Login failed";
       });
   },
 });
 
-
-export const { login, logout } = authSlice.actions;
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;
