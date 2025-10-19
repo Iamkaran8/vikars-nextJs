@@ -1,9 +1,6 @@
-'use client'
 
-import { FetchAllBlogs } from "@/app/utils/apis/blog/FetchAllBlogs"
-import { useAppDispatch } from "@/store/hooks"
 import Image from "next/image"
-import { useEffect } from "react"
+
 
 
 export const BlogCard = () => {
