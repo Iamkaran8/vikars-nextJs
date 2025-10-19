@@ -1,17 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { FetchAllBlogs } from "@/app/utils/apis/blog/FetchAllBlogs";
 
-// ✅ Use a consistent interface name
 export interface Blog {
     _id: string;
     title: string;
     description: string;
     image: string;
     date: string;
-    category: string;
-    createdAt: string;
-    updatedAt: string;
-    __v: string;
+    category?: string; // ✅ optional
+    createdAt?: string;
+    updatedAt?: string;
+    __v?: string;
 }
 
 export interface BlogState {
