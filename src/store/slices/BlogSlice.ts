@@ -35,7 +35,7 @@ export const BlogSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(FetchAllBlogs.pending, (state, action) => {
+            .addCase(FetchAllBlogs.pending, (state) => {
                 state.loading = true;
                 state.error = null
             })
