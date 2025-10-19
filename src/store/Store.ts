@@ -3,18 +3,19 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from '@reduxjs/toolkit';
 
-// Import your slices here
+
 import authSlice from './slices/authSlice';
+import BlogSlice from './slices/BlogSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'], // Add slice names you want to persist
+  whitelist: ['auth'],
 };
 
 const rootReducer = combineReducers({
-  // Add your slices here
   auth: authSlice,
+  blogs: BlogSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
