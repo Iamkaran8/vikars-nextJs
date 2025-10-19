@@ -25,7 +25,7 @@ export const AdminLogin = createAsyncThunk<LoginResponse, LoginPayload>(
             if (!res.ok) return rejectWithValue(data.error || 'Invalid credentials');
 
             return { email: payload.email, token: data.token };
-        } catch (err: any) {
+        } catch (err: string | null | any) {
             return rejectWithValue(err.message);
         }
     }

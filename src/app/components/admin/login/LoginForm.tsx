@@ -2,6 +2,7 @@
 
 import { AdminLogin } from "@/app/utils/apis/admin/AdminLogin";
 import { useAppDispatch } from "@/store/hooks";
+import { RootState } from "@/store/Store";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -11,10 +12,12 @@ interface FormDataTypes {
     password: string;
 }
 
+
+
 export const LoginForm = () => {
 
     const diaptach = useAppDispatch()
-    const { loading, error } = useSelector((state: any) => state.auth)
+    const { loading, error } = useSelector((state: RootState ) => state.auth)
 
     const [formData, setFormData] = useState<FormDataTypes>({
         email: "",

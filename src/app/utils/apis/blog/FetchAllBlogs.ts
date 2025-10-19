@@ -12,7 +12,7 @@ export const FetchAllBlogs = createAsyncThunk('fetchAllBlogs', async (_, { rejec
         const data = await response.json()
         return data
 
-    } catch (err: any) {
+    } catch (err: null | any | string) {
         rejectWithValue(err.message)
     }
 })
