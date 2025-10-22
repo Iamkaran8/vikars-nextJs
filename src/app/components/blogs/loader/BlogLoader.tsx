@@ -17,14 +17,14 @@ export const BlogLoader = () => {
                 </h1>
 
 
-                <p className="text-[16px] text-gray-700 line-clamp-3 flex flex-col gap-2">
+                <div className="text-[16px] text-gray-700 line-clamp-3 flex flex-col gap-2">
                     <div className="animate-pulse bg-[#99a1af] rounded-[20px] h-[20px]">
 
                     </div>
                     <div className="animate-pulse bg-[#99a1af] rounded-[20px] h-[20px]">
 
                     </div>
-                </p>
+                </div>
 
 
                 <div className="flex items-center justify-between pt-4 text-sm text-gray-500">

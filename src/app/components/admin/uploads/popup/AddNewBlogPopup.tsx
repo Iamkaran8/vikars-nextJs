@@ -1,11 +1,12 @@
 'use client'
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useAppDispatch } from "@/store/hooks";
+import { AddNewBlogsApi } from "@/app/utils/apis/admin/blogs/AddNewBlogsApi";
 
 export const AddNewBlogPopup = () => {
     const [showPopup, setShowPopup] = useState(false);
 
-    // Store blog fields
     const [blog, setBlog] = useState({
         title: "",
         description: "",
@@ -14,16 +15,21 @@ export const AddNewBlogPopup = () => {
         category: "",
     });
 
+
     // Handle input changes
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setBlog((prev) => ({ ...prev, [name]: value }));
+
     };
+
+    const dispatch = useAppDispatch()
 
     // Handle submit
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("New Blog Data:", blog);
+        dispatch(AddNewBlogsApi(blog))
         setShowPopup(false);
     };
 
