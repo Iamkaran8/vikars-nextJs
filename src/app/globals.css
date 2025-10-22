@@ -31,3 +31,29 @@ html {
 #contact_us{
   scroll-margin-top: 150px;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+
+/* global.css or tailwind.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;     /* Firefox */
+}

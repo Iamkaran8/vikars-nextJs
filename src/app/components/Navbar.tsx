@@ -4,7 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-const Navigations = [{ menu: "Home", path: "/" }, { menu: "Blog", path: '/blog' }];
+const Navigations = [
+  { menu: "Home", path: "/" },
+  { menu: "Blog", path: '/blog' }
+]
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
