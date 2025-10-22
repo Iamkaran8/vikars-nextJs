@@ -32,8 +32,8 @@ export default function Page() {
             <Navbar />
             <div className="px-4 sm:px-6 md:px-10 py-6 md:py-8 lg:py-10 cont text-14 sm:text-16 lg:text-20">
                 <div className="flex flex-wrap gap-16 pt-[100px] md:pt-[130px]">
-                    {loading && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((card) => (
-                        <BlogLoader />
+                    {loading && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((index) => (
+                        <BlogLoader key={index} />
                     ))}
                     {error && <p className="text-red-500">Error: {error}</p>}
                     {!loading && allBlogs && allBlogs.length > 0 ? (
