@@ -17,7 +17,7 @@ interface FormDataTypes {
 export const LoginForm = () => {
 
     const diaptach = useAppDispatch()
-    const { loading, error } = useSelector((state: RootState ) => state.auth)
+    const { loading, error } = useSelector((state: RootState) => state.auth)
 
     const [formData, setFormData] = useState<FormDataTypes>({
         email: "",
@@ -38,12 +38,13 @@ export const LoginForm = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen  w-[100%]">
-            <h2 className="text-32 font-bold mb-[30px]">Admin Login</h2>
+        <div className="flex flex-col items-start justify-center h-screen  w-[100%]">
+
             <form
-                className="flex flex-col gap-8 w-[75%]"
+                className="flex flex-col gap-8 w-[75%]  rounded-[20px] shadow-2xl p-8"
                 onSubmit={handleFormSubmit}
             >
+                <h2 className="text-32 font-bold mb-[30px]">Admin Login</h2>
                 <div className="flex flex-col gap-1 w-[100%]">
                     <label htmlFor="email" className="text-25 font-bold">Email Id:</label>
                     <div className="border border-forest rounded-[15px]  bg-[#FFE694] flex  items-center px-3 ">

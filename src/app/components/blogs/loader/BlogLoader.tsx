@@ -33,7 +33,7 @@ export const BlogLoader = () => {
 
                         </div>
                     </span>
-                    
+
                 </div>
             </div>
         </>
