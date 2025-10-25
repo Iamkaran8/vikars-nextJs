@@ -24,8 +24,8 @@ export const FetchSingleBlog = createAsyncThunk(
             // Parse response data
             const data = await response.json();
             return data;
-        } catch (error: any) {
-            return rejectWithValue(error.message || "Something went wrong");
+        } catch (error: unknown) {
+            return rejectWithValue(error || "Something went wrong");
         }
     }
 );

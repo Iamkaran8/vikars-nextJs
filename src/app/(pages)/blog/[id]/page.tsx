@@ -8,7 +8,7 @@ interface BlogPageProps {
 }
 
 export default function BlogPage({ params }: BlogPageProps) {
-    const blogId = params.id;
+
     return (
         <>
             <Navbar />
