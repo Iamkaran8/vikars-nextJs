@@ -30,7 +30,7 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
 
             <div className="w-full h-[200px] relative">
                 <Image
-                    src={blog.image}
+                    src={blog.image || "/blog_1.png"}
                     alt={blog.title}
                     fill
                     className="rounded-[20px] object-cover"

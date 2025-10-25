@@ -3,6 +3,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { useAppDispatch } from "@/store/hooks";
 import { AddNewBlogsApi } from "@/app/utils/apis/admin/blogs/AddNewBlogsApi";
+import { FetchAllBlogs } from "@/app/utils/apis/blog/FetchAllBlogs";
 
 export const AddNewBlogPopup = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -31,6 +32,14 @@ export const AddNewBlogPopup = () => {
         console.log("New Blog Data:", blog);
         dispatch(AddNewBlogsApi(blog))
         setShowPopup(false);
+        dispatch(FetchAllBlogs())
+        setBlog({
+            title: "",
+            description: "",
+            image: "",
+            date: "",
+            category: "",
+        });
     };
 
     return (
@@ -46,7 +55,7 @@ export const AddNewBlogPopup = () => {
             {/* Popup Overlay */}
             {showPopup && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-sm bg-black/40 scrollbar-hide">
-                    <div className="bg-white w-[50%] max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl p-10 relative animate-fadeIn scrollbar-hide">
+                    <div className="bg-white w-[90%] lg:w-[50%] max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl p-10 relative animate-fadeIn scrollbar-hide">
                         {/* Close Button */}
                         <button
                             onClick={() => setShowPopup(false)}
