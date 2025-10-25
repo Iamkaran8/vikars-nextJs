@@ -45,10 +45,8 @@
 //     }
 //   }
 // );
-
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export interface AdminLoginPayload {
   email: string;
@@ -64,17 +62,21 @@ export interface AdminLoginResponse {
 }
 
 export const AdminLogin = createAsyncThunk<
-  AdminLoginResponse,      // ✅ return type (fulfilled)
-  AdminLoginPayload,       // ✅ argument type (payload)
-  { rejectValue: string }  // ✅ reject type
+  AdminLoginResponse,      // ✅ Success return type
+  AdminLoginPayload,       // ✅ Argument type
+  { rejectValue: string }  // ✅ Error type
 >(
   "auth/AdminLogin",
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/api/admin/login", credentials);
       return data as AdminLoginResponse;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || "Login failed");
+    } catch (err: unknown) {
+      // ✅ Safely handle Axios and generic errors
+      const error = err as AxiosError<{ message?: string }>;
+      const message =
+        error.response?.data?.message || error.message || "Login failed";
+      return rejectWithValue(message);
     }
   }
 );
