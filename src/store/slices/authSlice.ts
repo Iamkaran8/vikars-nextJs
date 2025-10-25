@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AdminLogin } from "@/app/utils/apis/admin/AdminLogin";
 
-interface User {
-  token: string;
-  admin: {
-    id: string;
-    name: string;
-    email: string;
-  };
+
+
+export interface User {
+  _id: string;
+  name: string;
+  email: string;
+  type: "Admin" | "User"; 
+  token?: string;
 }
 
 interface AuthState {
