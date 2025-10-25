@@ -26,15 +26,24 @@ export const EditBlogCards = ({ blog }: EditBlogCardProps) => {
       dispatch(FetchAllBlogs())
     }, 2000)
   }
+  const isValidImageUrl = (url?: string): boolean => {
+    if (!url) return false;
+    try {
+      const parsed = new URL(url);
+      return parsed.hostname === "ik.imagekit.io";
+    } catch {
+      return false;
+    }
+  };
   return (
     <div className="flex flex-col p-4 lg:w-[30%] md:w-[45%] w-[100%] rounded-[20px] shadow hover:shadow-xl duration-300 ease-in hover:-translate-y-4">
       <div className="w-full h-[200px] relative">
         <Image
-          src={blog.image || "/blog_1.png"}
+          src={isValidImageUrl(blog.image) ? blog.image : "/blog_1.png"}
           alt={blog.title}
           fill
           className="rounded-[20px] object-cover"
-        />Q
+        />
       </div>
       <h2 className="text-[18px] font-bold mt-4 mb-2">{blog.title}</h2>
       <p className="text-gray-700 line-clamp-3">{blog.description}</p>
