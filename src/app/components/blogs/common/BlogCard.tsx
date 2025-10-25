@@ -30,8 +30,13 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
         day: "numeric",
     });
 
+
+    const router = 
+    const handleOnClick = (id: string) => {
+
+    }
     return (
-        <div className="flex flex-col p-4 lg:w-[30%] md:w-[45%] w-[100%] rounded-[20px] shadow hover:shadow-xl duration-300 ease-in hover:-translate-y-4 bg-white" key={blog._id}>
+        <div className="flex flex-col p-4 lg:w-[30%] md:w-[45%] w-[100%] rounded-[20px] shadow hover:shadow-xl duration-300 ease-in hover:-translate-y-4 bg-white" key={blog._id} onClick={() => handleOnClick(blog._id)}>
             <div className="w-full h-[200px] relative">
                 <Image
                     src={isValidImageUrl(blog.image) ? blog.image : "/blog_1.png"}

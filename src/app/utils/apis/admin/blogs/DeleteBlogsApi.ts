@@ -21,9 +21,9 @@ export const DeleteBlogsApi = createAsyncThunk(
 
       const data = await response.json();
       return data;
-    } catch (err: any) {
+    } catch (err: unknown) {
         // return custom error message
-        return rejectWithValue(err.message || "Something went wrong");
+        return rejectWithValue(err || "Something went wrong");
     }
   }
 );
