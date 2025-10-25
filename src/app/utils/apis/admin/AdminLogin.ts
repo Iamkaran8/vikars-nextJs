@@ -95,14 +95,14 @@ interface AdminLoginResponse {
 }
 
 export const AdminLogin = createAsyncThunk<
-  AdminLoginResponse,           // return type
-  AdminLoginPayload,            // argument type
-  { rejectValue: string }       // rejected value type
+  AdminLoginResponse,
+  AdminLoginPayload,
+  { rejectValue: string }
 >(
   "auth/login",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/login`, {
+      const response = await fetch('/api/auth/login', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
