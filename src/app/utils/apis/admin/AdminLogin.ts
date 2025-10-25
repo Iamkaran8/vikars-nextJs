@@ -1,35 +1,4 @@
-// // import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// // interface LoginPayload {
-// //     email: string;
-// //     password: string;
-// // }
-
-// // interface LoginResponse {
-// //     email: string;
-// //     token: string;
-// // }
-
-// // export const AdminLogin = createAsyncThunk<LoginResponse, LoginPayload>(
-// //     'auth/AdminLogin',
-// //     async (payload, { rejectWithValue }) => {
-// //         try {
-// //             const res = await fetch('/api/auth/login', {
-// //                 method: 'POST',
-// //                 headers: { 'Content-Type': 'application/json' },
-// //                 body: JSON.stringify(payload),
-// //             });
-
-// //             const data = await res.json();
-
-// //             if (!res.ok) return rejectWithValue(data.error || 'Invalid credentials');
-
-// //             return { email: payload.email, token: data.token };
-// //         } catch (err: string | null | any) {
-// //             return rejectWithValue(err.message);
-// //         }
-// //     }
-// // );
 
 
 // import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -49,14 +18,14 @@
 // }
 
 // export const AdminLogin = createAsyncThunk<
-//   AdminLoginResponse,           // ✅ return type
-//   AdminLoginPayload,            // ✅ argument type
-//   { rejectValue: string }       // ✅ rejected value type
+//   AdminLoginResponse,
+//   AdminLoginPayload,
+//   { rejectValue: string }
 // >(
 //   "auth/login",
 //   async (formData, { rejectWithValue }) => {
 //     try {
-//       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/login`, {
+//       const response = await fetch('/api/auth/login', {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify(formData),
@@ -79,46 +48,33 @@
 
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-interface AdminLoginPayload {
+export interface AdminLoginPayload {
   email: string;
   password: string;
 }
 
-interface AdminLoginResponse {
+export interface AdminLoginResponse {
+  _id: string;
+  name: string;
+  email: string;
+  type: "Admin" | "User";
   token: string;
-  admin: {
-    id: string;
-    name: string;
-    email: string;
-  };
 }
 
 export const AdminLogin = createAsyncThunk<
-  AdminLoginResponse,
-  AdminLoginPayload,
-  { rejectValue: string }
+  AdminLoginResponse,      // ✅ return type (fulfilled)
+  AdminLoginPayload,       // ✅ argument type (payload)
+  { rejectValue: string }  // ✅ reject type
 >(
-  "auth/login",
-  async (formData, { rejectWithValue }) => {
+  "auth/AdminLogin",
+  async (credentials, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/auth/login', {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errData = await response.json();
-        return rejectWithValue(errData.message || "Login failed");
-      }
-
-      const data: AdminLoginResponse = await response.json();
-      return data;
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Something went wrong";
-      return rejectWithValue(errorMessage);
+      const { data } = await axios.post("/api/admin/login", credentials);
+      return data as AdminLoginResponse;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Login failed");
     }
   }
 );
