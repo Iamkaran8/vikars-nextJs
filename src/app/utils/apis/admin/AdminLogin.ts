@@ -69,7 +69,7 @@ export const AdminLogin = createAsyncThunk<
   "auth/AdminLogin",
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/api/admin/login", credentials);
+      const { data } = await axios.post("/api/auth/login", credentials);
       return data as AdminLoginResponse;
     } catch (err: unknown) {
       // ✅ Safely handle Axios and generic errors
