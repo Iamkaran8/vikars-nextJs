@@ -1,14 +1,18 @@
+import { SinglePost } from "@/app/components/blogs/singlePost/SinglePost";
+import Navbar from "@/app/components/Navbar";
+
 interface BlogPageProps {
-  params: {
-    id: string; 
-  };
+    params: {
+        id: string;
+    };
 }
 
 export default function BlogPage({ params }: BlogPageProps) {
-const blogId = params.id;
+    const blogId = params.id;
     return (
         <>
-            {blogId}
+            <Navbar />
+            <SinglePost />
         </>
     )
 }
